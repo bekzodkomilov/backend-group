@@ -32,4 +32,11 @@ public class CarController : ControllerBase
         var message = result.e is null ? "Success" : result.e.Message;
         return Ok(new {error, message});
     }
+
+    [HttpGet("/getcar")]
+    public async Task<IActionResult> GetCar([FromQuery]Guid id)
+    {
+        var car = await _service.GetByIdAsync(id);
+        return Ok(car);
+    }
 }

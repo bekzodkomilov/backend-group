@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace TaxiDrivers.Entities;
 public class Driver
@@ -13,5 +14,7 @@ public class Driver
 
     [ForeignKey(nameof(CarId))]
     public Car Car { get; set; }
+
+    [JsonIgnore]
     public Guid CarId { get; set; }
 }

@@ -11,4 +11,5 @@ public class Car
     public string Number { get; set; }
     public string Color { get; set; }
     public ECarType Type { get; set; }
+    public Driver Driver { get; set; }
 }

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using TaxiDrivers.Data;
 using TaxiDrivers.Entities;
 
@@ -33,9 +34,18 @@ public class CarService : IEntityService<Car>
         throw new NotImplementedException();
     }
 
-    public Task<Car> GetByIdAsync(Guid id)
+    public async Task<Car> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var car = _context.Cars.Include(c => c.Driver).FirstOrDefault(d => d.Id == id);
+            return car;
+        }
+        catch(Exception e)
+        {
+            _logger.LogError(e.Message);
+            return null;
+        }
     }
 
     public Task<List<Car>> GetAllAsync()

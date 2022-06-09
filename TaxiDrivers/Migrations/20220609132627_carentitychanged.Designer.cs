@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaxiDrivers.Data;
 
@@ -10,9 +11,10 @@ using TaxiDrivers.Data;
 namespace TaxiDrivers.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220609132627_carentitychanged")]
+    partial class carentitychanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -26,6 +28,9 @@ namespace TaxiDrivers.Migrations
                     b.Property<string>("Color")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("DriverId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Model")
                         .HasColumnType("TEXT");
 
@@ -36,6 +41,8 @@ namespace TaxiDrivers.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
 
                     b.ToTable("Cars");
                 });
@@ -63,26 +70,31 @@ namespace TaxiDrivers.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId")
-                        .IsUnique();
+                    b.HasIndex("CarId");
 
                     b.ToTable("Drivers");
+                });
+
+            modelBuilder.Entity("TaxiDrivers.Entities.Car", b =>
+                {
+                    b.HasOne("TaxiDrivers.Entities.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
                 });
 
             modelBuilder.Entity("TaxiDrivers.Entities.Driver", b =>
                 {
                     b.HasOne("TaxiDrivers.Entities.Car", "Car")
-                        .WithOne("Driver")
-                        .HasForeignKey("TaxiDrivers.Entities.Driver", "CarId")
+                        .WithMany()
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Car");
-                });
-
-            modelBuilder.Entity("TaxiDrivers.Entities.Car", b =>
-                {
-                    b.Navigation("Driver");
                 });
 #pragma warning restore 612, 618
         }
