@@ -47,4 +47,16 @@ public class DriverController : ControllerBase
         var drivers = await _service.GetAllAsync();
         return Ok(drivers);
     }
+
+    [HttpPut("updatedriver/{driverId}")]
+    public async Task<IActionResult> UpdareDriver([FromForm]UpdateDriver updateDriver, Guid driverId)
+    {
+        var driver = await _service.GetByIdAsync(driverId);
+        driver.CarId = updateDriver.CarId ?? driver.CarId;
+        driver.PhoneNumber = updateDriver.PhoneNumber ?? driver.PhoneNumber;
+        var result = await _service.UpdateAsync(driver);
+        var error = !result.IsSuccess;
+        var message = result.e is null ? "Success" : result.e.Message;
+        return Ok(new {error, message});
+    }
 }

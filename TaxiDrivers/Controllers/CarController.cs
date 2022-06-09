@@ -33,10 +33,17 @@ public class CarController : ControllerBase
         return Ok(new {error, message});
     }
 
-    [HttpGet("/getcar")]
-    public async Task<IActionResult> GetCar([FromQuery]Guid id)
+    [HttpGet("/getcar/{id}")]
+    public async Task<IActionResult> GetCar(Guid id)
     {
         var car = await _service.GetByIdAsync(id);
         return Ok(car);
+    }
+
+    [HttpGet("/getallcars")]
+    public async Task<IActionResult> GetAllCar()
+    {
+        var cars = await _service.GetAllAsync();
+        return Ok(cars);
     }
 }

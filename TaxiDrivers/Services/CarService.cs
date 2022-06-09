@@ -48,9 +48,9 @@ public class CarService : IEntityService<Car>
         }
     }
 
-    public Task<List<Car>> GetAllAsync()
+    public async Task<List<Car>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return _context.Cars.Include(c => c.Driver).ToList();
     }
 
     public Task<(bool IsSuccess, Exception e)> DeleteAsync(Guid id)

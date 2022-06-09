@@ -59,8 +59,24 @@ public class DriverService : IEntityService<Driver>
         }
     }
 
-    public Task<(bool IsSuccess, Exception e)> UpdateAsync(Driver entity)
+    public async Task<(bool IsSuccess, Exception e)> UpdateAsync(Driver entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var driver = await _context.Drivers.FirstOrDefaultAsync(d => d.CarId == entity.CarId);
+            if(driver != default)
+            {
+                throw new Exception("Bu mashinani olib bo'lmaydi!");
+            }
+            _context.Drivers.Update(entity);
+            await _context.SaveChangesAsync();
+            _logger.LogInformation("Driver update bo'ldi");
+            return (true, null);
+        }
+        catch(Exception e)
+        {
+            _logger.LogError("Update bo'lmadi driver");
+            return (false, e);
+        }
     }
 }
