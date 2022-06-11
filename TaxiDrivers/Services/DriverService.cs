@@ -21,14 +21,14 @@ public class DriverService : IEntityService<Driver>
 
     public async Task<List<Driver>> GetAllAsync()
     {
-        return _context.Drivers.Include(d => d.Car).Where(d => true).ToList();
+        return _context.Drivers.Include(d => d.Cars).Where(d => true).ToList();
     }
 
     public async Task<Driver> GetByIdAsync(Guid id)
     {
         try
         {
-            var driver = _context.Drivers.Include(d => d.Car).FirstOrDefault(d => d.Id == id);
+            var driver = _context.Drivers.Include(d => d.Cars).FirstOrDefault(d => d.Id == id);
             return driver;
         }
         catch(Exception e)
@@ -42,15 +42,10 @@ public class DriverService : IEntityService<Driver>
     {
         try
         {
-            var driver = await _context.Drivers.FirstOrDefaultAsync(d => d.CarId == entity.CarId);
-            if(driver != default)
-            {
-                throw new Exception("Bu mashinani olib bo'lmaydi!");
-            }
             await _context.Drivers.AddAsync(entity);
             await _context.SaveChangesAsync();
             _logger.LogInformation($"New driver is added to database with {entity.Id}");
-            return (true, null, driver);
+            return (true, null, entity);
         }
         catch(Exception e)
         {
@@ -63,11 +58,6 @@ public class DriverService : IEntityService<Driver>
     {
         try
         {
-            var driver = await _context.Drivers.FirstOrDefaultAsync(d => d.CarId == entity.CarId);
-            if(driver != default)
-            {
-                throw new Exception("Bu mashinani olib bo'lmaydi!");
-            }
             _context.Drivers.Update(entity);
             await _context.SaveChangesAsync();
             _logger.LogInformation("Driver update bo'ldi");

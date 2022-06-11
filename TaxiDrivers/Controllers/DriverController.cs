@@ -26,7 +26,6 @@ public class DriverController : ControllerBase
             LastName = newDriver.LastName,
             Age = newDriver.Age,
             PhoneNumber = newDriver.PhoneNumber,
-            CarId = newDriver.CarId
         };
         var result = await _service.InsertAsync(driver);
         var error = !result.IsSuccess;
@@ -52,7 +51,6 @@ public class DriverController : ControllerBase
     public async Task<IActionResult> UpdareDriver([FromForm]UpdateDriver updateDriver, Guid driverId)
     {
         var driver = await _service.GetByIdAsync(driverId);
-        driver.CarId = updateDriver.CarId ?? driver.CarId;
         driver.PhoneNumber = updateDriver.PhoneNumber ?? driver.PhoneNumber;
         var result = await _service.UpdateAsync(driver);
         var error = !result.IsSuccess;

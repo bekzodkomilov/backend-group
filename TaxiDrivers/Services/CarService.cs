@@ -29,9 +29,19 @@ public class CarService : IEntityService<Car>
         }
     }
 
-    public Task<(bool IsSuccess, Exception e)> UpdateAsync(Car entity)
+    public async Task<(bool IsSuccess, Exception e)> UpdateAsync(Car entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _context.Cars.Update(entity);
+            await _context.SaveChangesAsync();
+            return (true, null);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Car was not updated.\n{e.Message}");
+            return (false, e);
+        }
     }
 
     public async Task<Car> GetByIdAsync(Guid id)

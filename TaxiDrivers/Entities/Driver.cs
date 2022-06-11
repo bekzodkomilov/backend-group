@@ -12,9 +12,5 @@ public class Driver
     public string PhoneNumber { get; set; }
     public int Age { get; set; }   
 
-    [ForeignKey(nameof(CarId))]
-    public Car Car { get; set; }
-
-    [JsonIgnore]
-    public Guid CarId { get; set; }
+    public virtual ICollection<Car> Cars { get; set; }
 }
