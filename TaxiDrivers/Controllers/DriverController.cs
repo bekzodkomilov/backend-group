@@ -44,7 +44,8 @@ public class DriverController : ControllerBase
     public async Task<IActionResult> GetAllDriver()
     {
         var drivers = await _service.GetAllAsync();
-        return Ok(drivers);
+        var driversmodel = drivers.Select(d => new GetDriverModel(d)).ToList();
+        return Ok(driversmodel);
     }
 
     [HttpPut("updatedriver/{driverId}")]

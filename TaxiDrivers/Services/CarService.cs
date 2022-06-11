@@ -63,6 +63,11 @@ public class CarService : IEntityService<Car>
         return _context.Cars.Include(c => c.Driver).ToList();
     }
 
+    public async Task<List<Car>> GetByDriverIdAsync(Guid id)
+    {
+        return _context.Cars.Include(c => c.Driver).Where(c => c.DriverId == id).ToList();
+    }
+
     public Task<(bool IsSuccess, Exception e)> DeleteAsync(Guid id)
     {
         throw new NotImplementedException();

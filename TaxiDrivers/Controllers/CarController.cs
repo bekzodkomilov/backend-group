@@ -38,14 +38,15 @@ public class CarController : ControllerBase
     public async Task<IActionResult> GetCar(Guid id)
     {
         var car = await _service.GetByIdAsync(id);
-        return Ok(car);
+        return Ok(new GetCarModel(car));
     }
 
     [HttpGet("/getallcars")]
     public async Task<IActionResult> GetAllCar()
     {
         var cars = await _service.GetAllAsync();
-        return Ok(cars);
+        var carsmodel = cars.Select(c => new GetCarModel(c)).ToList();
+        return Ok(carsmodel);
     }
 
     [HttpPut("/updatecar/{carId}")]
@@ -59,5 +60,12 @@ public class CarController : ControllerBase
         var error = !result.IsSuccess;
         var message = result.e is null ? "Success" : result.e.Message;
         return Ok(new {error, message});
+    }
+
+    [HttpGet("/getbydriverid/{driverid}")]
+    public async Task<IActionResult> GetByDriverId(Guid driverid)
+    {
+        var cars = await _service.GetByDriverIdAsync(driverid);
+        return Ok(cars);
     }
 }

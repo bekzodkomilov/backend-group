@@ -12,5 +12,5 @@ public class Driver
     public string PhoneNumber { get; set; }
     public int Age { get; set; }   
 
-    public virtual ICollection<Car> Cars { get; set; }
+    public ICollection<Car> Cars { get; set; }
 }
