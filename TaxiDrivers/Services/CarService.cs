@@ -13,19 +13,19 @@ public class CarService : IEntityService<Car>
         _logger = logger;
         _context = context;
     }
-    public async Task<(bool IsSuccess, Exception e)> InsertAsync(Car entity)
+    public async Task<(bool IsSuccess, Exception e, Car entity)> InsertAsync(Car entity)
     {
         try
         {
             await _context.Cars.AddAsync(entity);
             await _context.SaveChangesAsync();
             _logger.LogInformation($"New car is added to database with {entity.Id}");
-            return (true, null);
+            return (true, null, entity);
         }
         catch(Exception e)
         {
             _logger.LogError($"New car was not added. Exception:\n{e.Message}");
-            return (false, e);
+            return (false, e, null);
         }
     }
 

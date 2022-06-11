@@ -30,7 +30,7 @@ public class CarController : ControllerBase
         var result = await _service.InsertAsync(car);
         var error = !result.IsSuccess;
         var message = result.e is null ? "Success" : result.e.Message;
-        return Ok(new {error, message});
+        return Ok(new {error, message, car});
     }
 
     [HttpGet("/getcar/{id}")]

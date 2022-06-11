@@ -38,7 +38,7 @@ public class DriverService : IEntityService<Driver>
         }
     }
 
-    public async Task<(bool IsSuccess, Exception e)> InsertAsync(Driver entity)
+    public async Task<(bool IsSuccess, Exception e, Driver entity)> InsertAsync(Driver entity)
     {
         try
         {
@@ -50,12 +50,12 @@ public class DriverService : IEntityService<Driver>
             await _context.Drivers.AddAsync(entity);
             await _context.SaveChangesAsync();
             _logger.LogInformation($"New driver is added to database with {entity.Id}");
-            return (true, null);
+            return (true, null, driver);
         }
         catch(Exception e)
         {
             _logger.LogError($"New driver was not added. Exception:\n{e.Message}");
-            return (false, e);
+            return (false, e, null);
         }
     }
 
