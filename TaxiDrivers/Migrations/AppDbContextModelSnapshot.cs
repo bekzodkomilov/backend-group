@@ -17,6 +17,21 @@ namespace TaxiDrivers.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
 
+            modelBuilder.Entity("CarDriver", b =>
+                {
+                    b.Property<Guid>("CarsId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("DriversId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CarsId", "DriversId");
+
+                    b.HasIndex("DriversId");
+
+                    b.ToTable("CarDriver");
+                });
+
             modelBuilder.Entity("TaxiDrivers.Entities.Car", b =>
                 {
                     b.Property<Guid>("Id")
@@ -24,9 +39,6 @@ namespace TaxiDrivers.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Color")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("DriverId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Model")
@@ -39,8 +51,6 @@ namespace TaxiDrivers.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DriverId");
 
                     b.ToTable("Cars");
                 });
@@ -68,20 +78,19 @@ namespace TaxiDrivers.Migrations
                     b.ToTable("Drivers");
                 });
 
-            modelBuilder.Entity("TaxiDrivers.Entities.Car", b =>
+            modelBuilder.Entity("CarDriver", b =>
                 {
-                    b.HasOne("TaxiDrivers.Entities.Driver", "Driver")
-                        .WithMany("Cars")
-                        .HasForeignKey("DriverId")
+                    b.HasOne("TaxiDrivers.Entities.Car", null)
+                        .WithMany()
+                        .HasForeignKey("CarsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Driver");
-                });
-
-            modelBuilder.Entity("TaxiDrivers.Entities.Driver", b =>
-                {
-                    b.Navigation("Cars");
+                    b.HasOne("TaxiDrivers.Entities.Driver", null)
+                        .WithMany()
+                        .HasForeignKey("DriversId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

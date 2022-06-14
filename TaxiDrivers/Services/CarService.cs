@@ -48,7 +48,7 @@ public class CarService : IEntityService<Car>
     {
         try
         {
-            var car = _context.Cars.Include(c => c.Driver).FirstOrDefault(d => d.Id == id);
+            var car = _context.Cars.Include(c => c.Drivers).FirstOrDefault(d => d.Id == id);
             return car;
         }
         catch(Exception e)
@@ -60,16 +60,46 @@ public class CarService : IEntityService<Car>
 
     public async Task<List<Car>> GetAllAsync()
     {
-        return _context.Cars.Include(c => c.Driver).ToList();
+        return _context.Cars.Include(c => c.Drivers).ToList();
     }
 
     public async Task<List<Car>> GetByDriverIdAsync(Guid id)
     {
-        return _context.Cars.Include(c => c.Driver).Where(c => c.DriverId == id).ToList();
+        return _context.Cars.Include(c => c.Drivers).ToList();
     }
 
-    public Task<(bool IsSuccess, Exception e)> DeleteAsync(Guid id)
+    public async Task<(bool IsSuccess, Exception e)> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var car = await GetByIdAsync(id);
+            _context.Cars.Remove(car);
+            await _context.SaveChangesAsync();
+            return (true, null);
+        }
+        catch (Exception e)
+        {
+            return (false, e);
+        }
+    }
+
+    public async Task<(bool IsSuccess, Exception e)> AddDriverAsync(Guid id, Guid driverId)
+    {
+        try
+        {
+            var driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == driverId);
+            if(driver == default) throw new Exception("Driver doesn't exist");
+            var car = await GetByIdAsync(id);
+            car.Drivers.Add(driver);
+            _context.Cars.Update(car);
+            await _context.SaveChangesAsync();
+            _logger.LogInformation("Ok");
+            return (true, null);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Something went wrong:\n{e.Message}");
+            return (false, e);
+        }
     }
 }

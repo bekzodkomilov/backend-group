@@ -11,8 +11,6 @@ public class GetCarModel
         Color = car.Color;
         Number = car.Number;
         Type = car.Type;
-        DriverId = car.DriverId;
-        DriverName = $"{car.Driver.FirstName} {car.Driver.LastName}";
     }
 
     public Guid Id { get; set; }
@@ -23,9 +21,5 @@ public class GetCarModel
     
     public string Color { get; set; }
 
-    public Guid DriverId { get; set; }
-
-    public string DriverName { get; set; }
-    
     public ECarType Type { get; set; }
 }

@@ -5,5 +5,4 @@ public class UpdateCar
     
     public string Color { get; set; }
     
-    public Guid? DriverId { get; set; }
 }

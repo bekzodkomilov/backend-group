@@ -11,13 +11,28 @@ using TaxiDrivers.Data;
 namespace TaxiDrivers.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220604134027_Initial")]
-    partial class Initial
+    [Migration("20220614134146_manytomany")]
+    partial class manytomany
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
+
+            modelBuilder.Entity("CarDriver", b =>
+                {
+                    b.Property<Guid>("CarsId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("DriversId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CarsId", "DriversId");
+
+                    b.HasIndex("DriversId");
+
+                    b.ToTable("CarDriver");
+                });
 
             modelBuilder.Entity("TaxiDrivers.Entities.Car", b =>
                 {
@@ -63,6 +78,21 @@ namespace TaxiDrivers.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Drivers");
+                });
+
+            modelBuilder.Entity("CarDriver", b =>
+                {
+                    b.HasOne("TaxiDrivers.Entities.Car", null)
+                        .WithMany()
+                        .HasForeignKey("CarsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TaxiDrivers.Entities.Driver", null)
+                        .WithMany()
+                        .HasForeignKey("DriversId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

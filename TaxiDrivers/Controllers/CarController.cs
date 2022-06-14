@@ -26,7 +26,6 @@ public class CarController : ControllerBase
             Number = newCar.Number,
             Color = newCar.Color,
             Type = newCar.Type,
-            DriverId = newCar.DriverId
         };
         var result = await _service.InsertAsync(car);
         var error = !result.IsSuccess;
@@ -46,7 +45,7 @@ public class CarController : ControllerBase
     {
         var cars = await _service.GetAllAsync();
         var carsmodel = cars.Select(c => new GetCarModel(c)).ToList();
-        return Ok(carsmodel);
+        return Ok(cars);
     }
 
     [HttpPut("/updatecar/{carId}")]
@@ -54,7 +53,6 @@ public class CarController : ControllerBase
     {
         var car = await _service.GetByIdAsync(carId);
         car.Color = updateCar.Color ?? car.Color;
-        car.DriverId = updateCar.DriverId ?? car.DriverId;
         car.Number = updateCar.Number ?? car.Number;
         var result = await _service.UpdateAsync(car);
         var error = !result.IsSuccess;
@@ -67,5 +65,23 @@ public class CarController : ControllerBase
     {
         var cars = await _service.GetByDriverIdAsync(driverid);
         return Ok(cars);
+    }
+
+    [HttpPut("/adddriver/{carId}")]
+    public async Task<IActionResult> AddDriver([FromForm] Guid driverId, Guid carId)
+    {
+        var result = await _service.AddDriverAsync(carId, driverId);
+        return Ok(result);
+    }
+
+    [HttpDelete("/deletecar/{id}")]
+    public async Task<IActionResult> DeleteCar(Guid id)
+    {
+        var result = await _service.DeleteAsync(id);
+        if(!result.IsSuccess)
+        {
+            return BadRequest(result.e);
+        }
+        return Ok(result);
     }
 }

@@ -14,9 +14,5 @@ public class Car
     public string Color { get; set; }
     public ECarType Type { get; set; }
 
-    [JsonIgnore]
-    public Guid DriverId { get; set; }
-
-    [ForeignKey(nameof(DriverId))]
-    public Driver Driver { get; set; }
+    public ICollection<Driver> Drivers { get; set; }
 }
