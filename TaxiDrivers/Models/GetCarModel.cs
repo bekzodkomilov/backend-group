@@ -11,6 +11,7 @@ public class GetCarModel
         Color = car.Color;
         Number = car.Number;
         Type = car.Type;
+        CountOfDrivers = car.Drivers.Count;
     }
 
     public Guid Id { get; set; }
@@ -20,6 +21,8 @@ public class GetCarModel
     public string Number { get; set; }
     
     public string Color { get; set; }
+
+    public int CountOfDrivers { get; set; }
 
     public ECarType Type { get; set; }
 }

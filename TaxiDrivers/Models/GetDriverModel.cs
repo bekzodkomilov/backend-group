@@ -9,7 +9,7 @@ public class GetDriverModel
         Name = $"{driver.FirstName} {driver.LastName}";
         Age = driver.Age;
         PhoneNumber = driver.PhoneNumber;
-        NumberOfCars = driver.Cars.Count;
+        CountOfCars = driver.Cars.Count;
     }
     public Guid Id { get; set; }
     
@@ -19,6 +19,6 @@ public class GetDriverModel
     
     public string PhoneNumber { get; set; }
 
-    public int NumberOfCars { get; set; }
+    public int CountOfCars { get; set; }
     
 }

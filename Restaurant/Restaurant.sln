@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Api", "Restaurant.Api\Restaurant.Api.csproj", "{4E8A6D34-F768-4C9D-9F79-F5B73F9E84FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Data", "Restaurant.Data\Restaurant.Data.csproj", "{E027F3DB-EDE8-4304-BB83-795BD4760CD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Domain", "Restaurant.Domain\Restaurant.Domain.csproj", "{31292CFF-5CB0-4662-8923-A37D82CE3932}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Service", "Restaurant.Service\Restaurant.Service.csproj", "{03C76E3D-F0BC-4C5F-BF90-540174849F8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.TelegramBot", "Restaurant.TelegramBot\Restaurant.TelegramBot.csproj", "{FDD18F8A-48FA-477C-85CF-A24D7B3168B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E8A6D34-F768-4C9D-9F79-F5B73F9E84FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E8A6D34-F768-4C9D-9F79-F5B73F9E84FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E8A6D34-F768-4C9D-9F79-F5B73F9E84FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E8A6D34-F768-4C9D-9F79-F5B73F9E84FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E027F3DB-EDE8-4304-BB83-795BD4760CD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E027F3DB-EDE8-4304-BB83-795BD4760CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E027F3DB-EDE8-4304-BB83-795BD4760CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E027F3DB-EDE8-4304-BB83-795BD4760CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31292CFF-5CB0-4662-8923-A37D82CE3932}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31292CFF-5CB0-4662-8923-A37D82CE3932}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31292CFF-5CB0-4662-8923-A37D82CE3932}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31292CFF-5CB0-4662-8923-A37D82CE3932}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03C76E3D-F0BC-4C5F-BF90-540174849F8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03C76E3D-F0BC-4C5F-BF90-540174849F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03C76E3D-F0BC-4C5F-BF90-540174849F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03C76E3D-F0BC-4C5F-BF90-540174849F8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDD18F8A-48FA-477C-85CF-A24D7B3168B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDD18F8A-48FA-477C-85CF-A24D7B3168B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDD18F8A-48FA-477C-85CF-A24D7B3168B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDD18F8A-48FA-477C-85CF-A24D7B3168B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -45,7 +45,7 @@ public class CarController : ControllerBase
     {
         var cars = await _service.GetAllAsync();
         var carsmodel = cars.Select(c => new GetCarModel(c)).ToList();
-        return Ok(cars);
+        return Ok(carsmodel);
     }
 
     [HttpPut("/updatecar/{carId}")]
@@ -60,11 +60,12 @@ public class CarController : ControllerBase
         return Ok(new {error, message});
     }
 
-    [HttpGet("/getbydriverid/{driverid}")]
-    public async Task<IActionResult> GetByDriverId(Guid driverid)
+    [HttpGet("/getbydriverid")]
+    public async Task<IActionResult> GetByDriverId([FromQuery]Guid DriverId)
     {
-        var cars = await _service.GetByDriverIdAsync(driverid);
-        return Ok(cars);
+        var cars = await _service.GetByDriverIdAsync(DriverId);
+        var carsmodel = cars.Select(c => new GetCarModel(c)).ToList();
+        return Ok(carsmodel);
     }
 
     [HttpPut("/adddriver/{carId}")]

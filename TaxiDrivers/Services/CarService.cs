@@ -65,7 +65,8 @@ public class CarService : IEntityService<Car>
 
     public async Task<List<Car>> GetByDriverIdAsync(Guid id)
     {
-        return _context.Cars.Include(c => c.Drivers).ToList();
+        var driver = await _context.Drivers.Include(d => d.Cars).FirstOrDefaultAsync(d => d.Id == id);
+        return driver.Cars.ToList();
     }
 
     public async Task<(bool IsSuccess, Exception e)> DeleteAsync(Guid id)
