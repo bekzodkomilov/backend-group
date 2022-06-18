@@ -12,9 +12,4 @@ public class RestaurantDbContext : DbContext
     public DbSet<Dish> Dishes { get; set; }
     public RestaurantDbContext(DbContextOptions<RestaurantDbContext> options)
         :base(options) { }
-
-    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    // {
-    //     optionsBuilder.UseNpgsql();
-    // }
 }
