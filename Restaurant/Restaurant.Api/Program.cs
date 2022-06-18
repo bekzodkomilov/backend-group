@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<RestaurantDbContext>(options =>
 {
     options.UseNpgsql(
-        optionsBuilder => optionsBuilder.MigrationsAssembly("Restaurant.Api")
+        optionsBuilder => optionsBuilder.MigrationsAssembly("Restaurant.Data")
     );
 }, ServiceLifetime.Singleton);
 

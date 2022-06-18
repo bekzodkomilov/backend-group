@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Restaurant.Data.Context;
 using Restaurant.Data.Repositories.Interfaces;
@@ -33,27 +34,49 @@ public class BookedDishesRepository : IBookedDishesRepository
 
     public async Task<List<BookedDish>> GetAllAsync(Func<BookedDish, bool> p = null)
     {
-        return _context.BookedDishes.Where(p).ToList();
+        return _context.BookedDishes.Include(p => p.Book).Where(p).ToList();
     }
 
     public async Task<List<BookedDish>> GetByBookIdAsync(Guid id)
     {
-        var bds = _context.BookedDishes.Where(p => p.BookId == id).ToList();
+        var bds = _context.BookedDishes.Include(p => p.Book).Where(p => p.BookId == id).ToList();
         return bds;
     }
 
     public async Task<BookedDish> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _context.BookedDishes.Include(p => p.Book).FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public Task<(bool IsSuccess, Exception e)> InsertAsync(BookedDish bookedDish)
+    public async Task<(bool IsSuccess, Exception e)> InsertAsync(BookedDish bookedDish)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await _context.BookedDishes.AddAsync(bookedDish);
+            await _context.SaveChangesAsync();
+            _logger.LogInformation($"Booked dish with {bookedDish.Id} id was added");
+            return (true, null);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Booked dish was not added.\nMessage: {e.Message}");
+            return (false, e);
+        }
     }
 
-    public Task<(bool IsSuccess, Exception e)> UpdateAsync(BookedDish bookedDish)
+    public async Task<(bool IsSuccess, Exception e)> UpdateAsync(BookedDish bookedDish)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _context.BookedDishes.Update(bookedDish);
+            await _context.SaveChangesAsync();
+            _logger.LogInformation($"Booked dish with {bookedDish.Id} was updated.");
+            return (true, null);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("Booked dish was not updated.");
+            return (false, e);
+        }
     }
 }
