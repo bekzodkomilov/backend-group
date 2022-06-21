@@ -7,7 +7,7 @@ using Restaurant.Domain.Entities.ApiEntities;
 namespace Restaurant.Data.Repositories;
 public class DishesRepository : IDishesRepository
 {
-    private readonly RestaurantDbContext _context;
+     private readonly RestaurantDbContext _context;
     private readonly ILogger<DishesRepository> _logger;
 
     public DishesRepository(RestaurantDbContext context, ILogger<DishesRepository> logger)
@@ -32,20 +32,20 @@ public class DishesRepository : IDishesRepository
         }
     }
 
-    public async Task<List<Dish>> GetAllAsync(Func<Dish, bool> p = null)
+    public async Task<List<Dish>> GetAllAsync(Func<Dish, bool> d = null)
     {
-        return _context.Dishes.Include(p => p.Category).Where(p).ToList();
+        return _context.Dishes.Include(d => d.Category).Where(d).ToList();
     }
 
-    public async Task<List<Dish>> GetByBookIdAsync(Guid id)
-    {
-        var ds = _context.Dishes.Include(p => p.Category).Where(p => p.CategoryId == id).ToList();
+    public async Task<List<Dish>> GetByCategoryIdAsync(Guid id)
+     {
+        var ds = _context.Dishes.Include(d => d.Category).Where(d => d.CategoryId == id).ToList();
         return ds;
     }
 
     public async Task<Dish> GetByIdAsync(Guid id)
     {
-        return await _context.Dishes.Include(p => p.Category).FirstOrDefaultAsync(p => p.Id == id);
+        return await _context.Dishes.Include(d => d.Category).FirstOrDefaultAsync(d => d.Id == id);
     }
 
     public async Task<(bool IsSuccess, Exception e)> InsertAsync(Dish dish)
@@ -79,4 +79,5 @@ public class DishesRepository : IDishesRepository
             return (false, e);
         }
     }
+
 }
