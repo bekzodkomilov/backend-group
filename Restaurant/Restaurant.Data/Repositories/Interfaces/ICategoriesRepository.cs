@@ -5,7 +5,6 @@ namespace Restaurant.Data.Repositories.Interfaces;
 public interface ICategoriesRepository
 {
     Task<Category> GetByIdAsync(Guid id);
-    Task<List<Category>> GetByCategoryIdAsync(Guid id);
     Task<List<Category>> GetAllAsync(Func<Category, bool> p = null);
     Task<(bool IsSuccess, Exception e)> InsertAsync(Category category);
     Task<(bool IsSuccess, Exception e)> UpdateAsync(Category category);

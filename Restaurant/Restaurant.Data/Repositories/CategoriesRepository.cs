@@ -39,12 +39,6 @@ public class CategoriesRepository : ICategoriesRepository
         return _context.Categories.Include(p => p.Dishes).Where(p).ToList();
     }
 
-    public async Task<List<Category>> GetByCategoryIdAsync(Guid id)
-    {
-        var bds = _context.Categories.Include(p => p.Dishes).Where(p => p.Id == id).ToList();
-        return bds;
-    }
-
     public async Task<Category>GetByIdAsync(Guid id)
     {
         var cate = _context.Categories.Include(p => p.Dishes).FirstOrDefault(p => p.Id == id);
