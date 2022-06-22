@@ -24,12 +24,12 @@ public class CategoriesRepository : ICategoriesRepository
             var cd = await GetByIdAsync(id);
             _context.Categories.Remove(cd);
             await _context.SaveChangesAsync();
-            _logger.LogInformation($"Booked dish with {cd.Id} was deleted.");
+            _logger.LogInformation($"Category dish with {cd.Id} was deleted.");
             return (true, null);
         }
         catch (Exception e)
         {
-            _logger.LogError($"Booked dish wasn't deleted.\nMessage: {e.Message}");
+            _logger.LogError($"Category dish wasn't deleted.\nMessage: {e.Message}");
             return (false, e);
         }
     }
@@ -39,7 +39,7 @@ public class CategoriesRepository : ICategoriesRepository
         return _context.Categories.Include(p => p.Dishes).Where(p).ToList();
     }
 
-    public async Task<Category>GetByIdAsync(Guid id)
+    public async Task<Category> GetByIdAsync(Guid id)
     {
         var cate = _context.Categories.Include(p => p.Dishes).FirstOrDefault(p => p.Id == id);
         return cate;
@@ -51,12 +51,12 @@ public class CategoriesRepository : ICategoriesRepository
         {
             await _context.Categories.AddAsync(category);
             await _context.SaveChangesAsync();
-            _logger.LogInformation($"Booked dish with {category.Id} id was added");
+            _logger.LogInformation($"Category dish with {category.Id} id was added");
             return (true, null);
         }
         catch (Exception e)
         {
-            _logger.LogError($"Booked dish was not added.\nMessage: {e.Message}");
+            _logger.LogError($"Category dish was not added.\nMessage: {e.Message}");
             return (false, e);
         }
     }
@@ -67,12 +67,12 @@ public class CategoriesRepository : ICategoriesRepository
         {
             _context.Categories.Update(category);
             await _context.SaveChangesAsync();
-            _logger.LogInformation($"Booked dish with {category.Id} was updated.");
+            _logger.LogInformation($"Category dish with {category.Id} was updated.");
             return (true, null);
         }
         catch (Exception e)
         {
-            _logger.LogError("Booked dish was not updated.");
+            _logger.LogError("Category dish was not updated.");
             return (false, e);
         }
     }
