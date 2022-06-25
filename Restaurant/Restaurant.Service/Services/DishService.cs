@@ -20,4 +20,9 @@ public class DishService
         var result = await _repo.InsertAsync(newDish.ToEntity());
         return result.IsSuccess;
     }
+      public async Task<List<GetDishViewModel>> GetAllDishesAsync()
+    {
+        var result = (await _repo.GetAllAsync()).Select(d => d.ToModel()).ToList();
+        return result;
+    }
 }
