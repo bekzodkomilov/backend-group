@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Service", "Resta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.TelegramBot", "Restaurant.TelegramBot\Restaurant.TelegramBot.csproj", "{FDD18F8A-48FA-477C-85CF-A24D7B3168B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.ViewModel", "Restaurant.ViewModel\Restaurant.ViewModel.csproj", "{27F365D9-004F-44FE-9571-245F7127B93B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{FDD18F8A-48FA-477C-85CF-A24D7B3168B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDD18F8A-48FA-477C-85CF-A24D7B3168B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDD18F8A-48FA-477C-85CF-A24D7B3168B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27F365D9-004F-44FE-9571-245F7127B93B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27F365D9-004F-44FE-9571-245F7127B93B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27F365D9-004F-44FE-9571-245F7127B93B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27F365D9-004F-44FE-9571-245F7127B93B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
