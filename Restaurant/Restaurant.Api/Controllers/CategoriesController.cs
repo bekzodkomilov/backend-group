@@ -24,4 +24,11 @@ public class CategoriesController : ControllerBase
         if(response) return Ok(response);
         return BadRequest(response);
     }
+
+    [HttpGet("getall")]
+    public async Task<IActionResult> GetAllCategory()
+    {
+        var result = await _service.GetAllCategoriesAsync();
+        return Ok(result);
+    }
 }
