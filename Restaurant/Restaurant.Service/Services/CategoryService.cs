@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using Restaurant.Data.Repositories.Interfaces;
 using Restaurant.Service.Mappers;
 using Restaurant.ViewModel.CategoryViewModels;
+using Restaurant.ViewModel.DishViewModels;
 
 namespace Restaurant.Service.Services;
 
@@ -20,5 +21,10 @@ public class CategoryService
     {
         var result = await _repo.InsertAsync(newCategory.ToEntity());
         return result.IsSuccess;
+    }
+    public async Task<List<GetDishViewModel>> GetAllDishByCategoryIdAsync(Guid CategoryId)
+    {
+        var result = (await _repo.GetByCategoryIdAsync(CategoryId)).Select(d => d.ToModel()).ToList();
+        return result;
     }
 }
