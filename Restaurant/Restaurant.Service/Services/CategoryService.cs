@@ -22,9 +22,9 @@ public class CategoryService
         var result = await _repo.InsertAsync(newCategory.ToEntity());
         return result.IsSuccess;
     }
-    public async Task<List<GetDishViewModel>> GetAllDishByCategoryIdAsync(Guid CategoryId)
+    public async Task<List<GetCategoryViewModel>> GetAllCategoriesAsync()
     {
-        var result = (await _repo.GetByCategoryIdAsync(CategoryId)).Select(d => d.ToModel()).ToList();
+        var result = (await _repo.GetAllAsync()).Select(d => d.ToModel()).ToList();
         return result;
     }
 }
