@@ -21,4 +21,9 @@ public class CategoryService
         var result = await _repo.InsertAsync(newCategory.ToEntity());
         return result.IsSuccess;
     }
+    public async Task<List<GetCategoryViewModel>> GetAllCategoriesAsync()
+    {
+        var result = (await _repo.GetAllAsync()).Select(c => c.ToModel()).ToList();
+        return result;
+    }
 }
