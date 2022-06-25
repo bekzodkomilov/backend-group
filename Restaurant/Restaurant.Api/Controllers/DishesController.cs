@@ -24,4 +24,11 @@ public class DishesController : ControllerBase
         if(dish) return Ok(dish);
         return BadRequest(dish);
     }
+
+    [HttpGet("getdishesbycategoryid/{id}")]
+    public async Task<IActionResult> GetDishesByCategoryId(Guid id)
+    {
+        var res = await _service.GetAllDishByCategoryIdAsync(id);
+        return Ok(res);
+    }
 }
