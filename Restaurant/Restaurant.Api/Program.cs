@@ -14,6 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+builder.Services.AddScoped<DishService>();
+builder.Services.AddScoped<IDishesRepository, DishesRepository>();
 builder.Services.AddDbContext<RestaurantDbContext>(options =>
 {
     options.UseSqlServer(
