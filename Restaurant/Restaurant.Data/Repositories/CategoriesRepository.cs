@@ -36,6 +36,8 @@ public class CategoriesRepository : ICategoriesRepository
 
     public async Task<List<Category>> GetAllAsync(Func<Category, bool> p = null)
     {
+        if(p is null)
+            p = new Func<Category, bool>(p => true);
         return _context.Categories.Include(p => p.Dishes).Where(p).ToList();
     }
 
