@@ -1,15 +1,15 @@
 using Microsoft.Extensions.Logging;
-using Restaurant.Data.Repositories;
+using Restaurant.Data.Repositories.Interfaces;
 using Restaurant.Service.Mappers;
 using Restaurant.ViewModel.DishViewModels;
 
 namespace Restaurant.Service.Services;
 public class DishService
 {
-    private readonly DishesRepository _repo;
+    private readonly IDishesRepository _repo;
     private readonly ILogger<DishService> _logger;
 
-    public DishService(DishesRepository repo, ILogger<DishService> logger)
+    public DishService(IDishesRepository repo, ILogger<DishService> logger)
     {
         _repo = repo;
         _logger = logger;

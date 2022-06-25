@@ -2,7 +2,6 @@ using Microsoft.Extensions.Logging;
 using Restaurant.Data.Repositories.Interfaces;
 using Restaurant.Service.Mappers;
 using Restaurant.ViewModel.CategoryViewModels;
-using Restaurant.ViewModel.DishViewModels;
 
 namespace Restaurant.Service.Services;
 
