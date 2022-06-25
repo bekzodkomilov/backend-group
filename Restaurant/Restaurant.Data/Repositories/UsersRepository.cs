@@ -70,7 +70,7 @@ public class UsersRepository : IUsersRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("User was not updated.");
+            _logger.LogError($"User was not updated.\nError: {e.Message}");
             return (false, e);
         }
     }
