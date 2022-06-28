@@ -39,4 +39,17 @@ public class DishService
         return result.IsSuccess;
     }
     
+    public async Task<bool> UpdateDishAsync(UpdateDishViewModel model, Guid id)
+    {
+        var dish = await _repo.GetByIdAsync(id);
+        dish.Price = model.Price;
+        var result = await _repo.UpdateAsync(dish);
+        return result.IsSuccess;
+    }
+
+    public async Task<string> GetImageAsync(Guid id)
+    {
+        var dish = await _repo.GetByIdAsync(id);
+        return dish.Image;
+    }
 }

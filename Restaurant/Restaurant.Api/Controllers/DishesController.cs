@@ -46,4 +46,20 @@ public class DishesController : ControllerBase
         var res = await _service.DeleteByIdAsync(id);
         return Ok(res);
     }
+
+    [HttpPut("updatedish/{id}")]
+    public async Task<IActionResult> UpdateDish([FromForm]UpdateDishViewModel dish, Guid id)
+    {
+        var res = await _service.UpdateDishAsync(dish, id);
+        return Ok(res);
+    }
+
+    [HttpGet("image/{id}")]
+    public async Task<IActionResult> GetDishImage(Guid id)
+    {
+        var image = await _service.GetImageAsync(id);
+        byte[] data = System.Convert.FromBase64String(image.Replace("data:image/jpeg;base64,/", "/"));
+        MemoryStream ms = new MemoryStream(data);
+        return Ok(ms);
+    }
 }

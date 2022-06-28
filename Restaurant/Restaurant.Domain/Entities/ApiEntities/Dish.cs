@@ -7,6 +7,7 @@ public class Dish
     public Guid Id { get; set; }
     public string Name { get; set; }
     public long Price { get; set; }
+    public string Image { get; set; }
 
     [ForeignKey(nameof(CategoryId))]
     public Category Category { get; set; }

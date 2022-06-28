@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Restaurant.Domain.Entities.ApiEntities;
 using Restaurant.ViewModel.DishViewModels;
 
@@ -10,7 +11,8 @@ public static class DishMappers
             Id = Guid.NewGuid(),
             Name = model.Name,
             Price = model.Price,
-            CategoryId = model.CategoryId
+            CategoryId = model.CategoryId,
+            Image = model.Image.toByte()
         };
 
     public static GetDishViewModel ToModel(this Dish dish)
@@ -22,4 +24,14 @@ public static class DishMappers
             CategoryId = dish.CategoryId,
             Category = dish.Category.Name
         };
+
+    public static string toByte(this IFormFile image)
+    {
+        var memoryStream = new MemoryStream();
+        image.CopyToAsync(memoryStream);
+        var result = memoryStream.ToArray();
+        while(result.Count() == 0) result = memoryStream.ToArray();
+        var str = Convert.ToBase64String(result);
+        return "data:image/jpeg;base64,"+str;
+    }
 }
