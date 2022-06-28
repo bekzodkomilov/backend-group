@@ -31,4 +31,11 @@ public class CategoriesController : ControllerBase
         var result = await _service.GetAllCategoriesAsync();
         return Ok(result);
     }
+
+    [HttpDelete("deletecategory/{id}")]
+    public async Task<IActionResult> DeleteDishById(Guid id)
+    {
+        var res = await _service.DeleteByIdAsync(id);
+        return Ok(res);
+    }
 }
