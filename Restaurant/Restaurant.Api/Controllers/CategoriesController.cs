@@ -35,7 +35,6 @@ public class CategoriesController : ControllerBase
     [HttpDelete("deletecategory/{id}")]
     public async Task<IActionResult> DeleteDishById(Guid id)
     {
-        _logger.LogInformation("controller was called");
         var res = await _service.DeleteByIdAsync(id);
         return Ok(res);
     }
