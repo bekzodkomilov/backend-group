@@ -31,4 +31,19 @@ public class DishesController : ControllerBase
         var res = await _service.GetAllDishByCategoryIdAsync(id);
         return Ok(res);
     }
+
+    [HttpGet("getalldishes")]
+    public async Task<IActionResult> GetAllDishes()
+    {
+        var res = await _service.GetAllDishesAsync();
+        return Ok(res);
+    }
+
+    [HttpDelete("deletedish/{id}")]
+    public async Task<IActionResult> DeleteDishById(Guid id)
+    {
+        _logger.LogInformation("controller was called");
+        var res = await _service.DeleteByIdAsync(id);
+        return Ok(res);
+    }
 }

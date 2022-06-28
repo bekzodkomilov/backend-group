@@ -34,6 +34,8 @@ public class DishesRepository : IDishesRepository
 
     public async Task<List<Dish>> GetAllAsync(Func<Dish, bool> d = null)
     {
+        if(d is null)
+            d = new Func<Dish, bool>(p => true);
         return _context.Dishes.Include(d => d.Category).Where(d).ToList();
     }
 

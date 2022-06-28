@@ -31,5 +31,12 @@ public class DishService
         var result = (await _repo.GetByCategoryIdAsync(CategoryId)).Select(d => d.ToModel()).ToList();
         return result;
     }
+
+    public async Task<bool> DeleteByIdAsync(Guid id)
+    {
+        _logger.LogInformation("Method was called");
+        var result = await _repo.DeleteIdAsync(id);
+        return result.IsSuccess;
+    }
     
 }
