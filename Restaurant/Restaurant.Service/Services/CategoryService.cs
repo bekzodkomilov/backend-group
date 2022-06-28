@@ -26,4 +26,10 @@ public class CategoryService
         var result = (await _repo.GetAllAsync()).Select(d => d.ToModel()).ToList();
         return result;
     }
+
+    public async Task<bool> DeleteByIdAsync(Guid id)
+    {
+        var result = await _repo.DeleteIdAsync(id);
+        return result.IsSuccess;
+    }
 }
