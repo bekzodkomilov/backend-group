@@ -56,5 +56,7 @@ public class BotHandlers
             message.Chat.Id,
             "Salom"
         );
+
+        _logger.LogInformation($"Message sent from: {message.From.Username} {message.Text}");
     }
 }
