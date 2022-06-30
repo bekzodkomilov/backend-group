@@ -62,4 +62,10 @@ public class DishesController : ControllerBase
         MemoryStream ms = new MemoryStream(data);
         return Ok(ms);
     }
+    [HttpPut("getdishbyid/{id}")]
+    public async Task<IActionResult> GetDishById(Guid id)
+    {
+        var result = await _service.GetDishById(id);
+        return Ok(result);
+    }
 }
