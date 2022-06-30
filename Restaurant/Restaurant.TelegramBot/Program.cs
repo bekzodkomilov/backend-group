@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Restaurant.Data.Context;
+using Restaurant.TelegramBot;
+using Telegram.Bot;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,9 @@ builder.Services.AddDbContext<BotDbContext>(options =>
     );
 }, ServiceLifetime.Singleton);
 
+builder.Services.AddHostedService<Bot>();
+builder.Services.AddSingleton<TelegramBotClient>(b => new TelegramBotClient(builder.Configuration.GetConnectionString("Token")));
+builder.Services.AddTransient<BotHandlers>();
 
 var app = builder.Build();
 
