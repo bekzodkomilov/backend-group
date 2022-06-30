@@ -7,10 +7,10 @@ using Restaurant.Domain.Entities.ApiEntities;
 namespace Restaurant.Data.Repositories;
 public class DishesRepository : IDishesRepository
 {
-     private readonly RestaurantDbContext _context;
+     private readonly ApiDbContext _context;
     private readonly ILogger<DishesRepository> _logger;
 
-    public DishesRepository(RestaurantDbContext context, ILogger<DishesRepository> logger)
+    public DishesRepository(ApiDbContext context, ILogger<DishesRepository> logger)
     {
         _context = context;
         _logger = logger;

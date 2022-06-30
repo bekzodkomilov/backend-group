@@ -3,17 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaurant.Data.Context;
 
 #nullable disable
 
-namespace Restaurant.Api.Migrations
+namespace Restaurant.TelegramBot.Migrations
 {
-    [DbContext(typeof(RestaurantDbContext))]
-    partial class RestaurantDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(BotDbContext))]
+    [Migration("20220630135417_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,45 +23,6 @@ namespace Restaurant.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("Restaurant.Domain.Entities.ApiEntities.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("Restaurant.Domain.Entities.ApiEntities.Dish", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Dishes");
-                });
 
             modelBuilder.Entity("Restaurant.Domain.Entities.BotEntities.Book", b =>
                 {
@@ -142,17 +105,6 @@ namespace Restaurant.Api.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Restaurant.Domain.Entities.ApiEntities.Dish", b =>
-                {
-                    b.HasOne("Restaurant.Domain.Entities.ApiEntities.Category", "Category")
-                        .WithMany("Dishes")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("Restaurant.Domain.Entities.BotEntities.Book", b =>
                 {
                     b.HasOne("Restaurant.Domain.Entities.BotEntities.User", "User")
@@ -173,11 +125,6 @@ namespace Restaurant.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("Restaurant.Domain.Entities.ApiEntities.Category", b =>
-                {
-                    b.Navigation("Dishes");
                 });
 
             modelBuilder.Entity("Restaurant.Domain.Entities.BotEntities.Book", b =>

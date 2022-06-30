@@ -40,4 +40,10 @@ public class CategoryService
         var result = await _repo.UpdateAsync(cate);
         return result.IsSuccess;
     }
+
+    public async Task<GetCategoryViewModel> GetCategoryByIdAsync(Guid id)
+    {
+        var res = await _repo.GetByIdAsync(id);
+        return res.ToModel();
+    }
 }

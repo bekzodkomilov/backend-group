@@ -8,10 +8,10 @@ namespace Restaurant.Data.Repositories;
 
 public class CategoriesRepository : ICategoriesRepository
 {
-    private readonly RestaurantDbContext _context;
+    private readonly ApiDbContext _context;
     private readonly ILogger<CategoriesRepository> _logger;
 
-    public CategoriesRepository(RestaurantDbContext context, ILogger<CategoriesRepository> logger)
+    public CategoriesRepository(ApiDbContext context, ILogger<CategoriesRepository> logger)
     {
         _context = context;
         _logger = logger;

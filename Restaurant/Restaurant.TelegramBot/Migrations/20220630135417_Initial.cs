@@ -3,24 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Restaurant.Api.Migrations
+namespace Restaurant.TelegramBot.Migrations
 {
-    public partial class Ok : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -38,26 +26,6 @@ namespace Restaurant.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.ChatId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Dishes",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<long>(type: "bigint", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Dishes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Dishes_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,11 +78,6 @@ namespace Restaurant.Api.Migrations
                 name: "IX_Books_UserChatId",
                 table: "Books",
                 column: "UserChatId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Dishes_CategoryId",
-                table: "Dishes",
-                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -123,13 +86,7 @@ namespace Restaurant.Api.Migrations
                 name: "BookedDishes");
 
             migrationBuilder.DropTable(
-                name: "Dishes");
-
-            migrationBuilder.DropTable(
                 name: "Books");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Users");

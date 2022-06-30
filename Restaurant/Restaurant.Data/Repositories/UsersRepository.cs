@@ -7,10 +7,10 @@ using Restaurant.Domain.Entities.BotEntities;
 namespace Restaurant.Data.Repositories;
 public class UsersRepository : IUsersRepository
 {
-    private readonly RestaurantDbContext _context;
+    private readonly BotDbContext _context;
     private readonly ILogger<UsersRepository> _logger;
 
-    public UsersRepository(RestaurantDbContext context, ILogger<UsersRepository> logger)
+    public UsersRepository(BotDbContext context, ILogger<UsersRepository> logger)
     {
         _context = context;
         _logger = logger;

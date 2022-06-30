@@ -7,10 +7,10 @@ using Restaurant.Domain.Entities.BotEntities;
 namespace Restaurant.Data.Repositories;
 public class BookedDishesRepository : IBookedDishesRepository
 {
-    private readonly RestaurantDbContext _context;
+    private readonly BotDbContext _context;
     private readonly ILogger<BookedDishesRepository> _logger;
 
-    public BookedDishesRepository(RestaurantDbContext context, ILogger<BookedDishesRepository> logger)
+    public BookedDishesRepository(BotDbContext context, ILogger<BookedDishesRepository> logger)
     {
         _context = context;
         _logger = logger;

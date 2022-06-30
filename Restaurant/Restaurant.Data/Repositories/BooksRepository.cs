@@ -9,9 +9,9 @@ namespace Restaurant.Data.Repositories;
 public class BooksRepository : IBooksRepository
 {
     private readonly ILogger<BooksRepository> _logger;
-    private readonly RestaurantDbContext _context;
+    private readonly BotDbContext _context;
 
-    public BooksRepository(ILogger<BooksRepository> logger, RestaurantDbContext context)
+    public BooksRepository(ILogger<BooksRepository> logger, BotDbContext context)
     {
         _logger = logger;
         _context = context;

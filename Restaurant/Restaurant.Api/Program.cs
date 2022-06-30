@@ -16,7 +16,7 @@ builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
 builder.Services.AddScoped<DishService>();
 builder.Services.AddScoped<IDishesRepository, DishesRepository>();
-builder.Services.AddDbContext<RestaurantDbContext>(options =>
+builder.Services.AddDbContext<ApiDbContext>(options =>
 {
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DbConnection"),
