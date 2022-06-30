@@ -32,4 +32,12 @@ public class CategoryService
         var result = await _repo.DeleteIdAsync(id);
         return result.IsSuccess;
     }
+
+    public async Task<bool> UpdateCategoryAsync(UpdateCategoryViewModel model, Guid id)
+    {
+        var cate = await _repo.GetByIdAsync(id);
+        cate.Name = model.Name;
+        var result = await _repo.UpdateAsync(cate);
+        return result.IsSuccess;
+    }
 }

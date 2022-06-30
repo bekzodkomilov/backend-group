@@ -38,4 +38,15 @@ public class CategoriesController : ControllerBase
         var res = await _service.DeleteByIdAsync(id);
         return Ok(res);
     }
+
+    [HttpPut("updatecategory/{id}")]
+    public async Task<IActionResult> UpdateCategoryAsync(UpdateCategoryViewModel model , Guid id)
+    {
+        var res = await _service.UpdateCategoryAsync(model, id);
+        if(res ==  false)
+        {
+            return BadRequest("you don't updated");
+        }
+        return Ok(res);
+    }
 }
