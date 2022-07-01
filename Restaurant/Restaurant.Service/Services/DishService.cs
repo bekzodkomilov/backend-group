@@ -52,4 +52,9 @@ public class DishService
         var dish = await _repo.GetByIdAsync(id);
         return dish.Image;
     }
+    public async Task<GetDishViewModel> GetDishById(Guid id)
+    {
+        var res = await _repo.GetByIdAsync(id);
+        return res.ToModel();
+    }
 }
