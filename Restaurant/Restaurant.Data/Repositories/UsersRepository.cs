@@ -32,6 +32,10 @@ public class UsersRepository : IUsersRepository
             return (false, e);
         }
     }
+    public async Task<bool> ExistsAsync(long id)
+    {
+        return await _context.Users.AnyAsync(d => d.ChatId == id);
+    }
 
     public async Task<List<User>> GetAllAsync(Func<User, bool> p = null)
     {

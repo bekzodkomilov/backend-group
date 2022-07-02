@@ -8,4 +8,5 @@ public interface IUsersRepository
     Task<(bool IsSuccess, Exception e)> InsertAsync(User user);
     Task<(bool IsSuccess, Exception e)> UpdateAsync(User user);
     Task<(bool IsSuccess, Exception e)> DeleteIdAsync(long id);
+    Task<bool> ExistsAsync(long id);  
 }
