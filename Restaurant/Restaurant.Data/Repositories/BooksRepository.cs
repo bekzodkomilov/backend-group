@@ -43,6 +43,10 @@ public class BooksRepository : IBooksRepository
     {
         return await _context.Books.Include(p => p.User).Include(p => p.BookedDishes).FirstOrDefaultAsync(p => p.Id == id);
     }
+    public async Task<bool> ExistsAsync(Guid id)
+    {
+        return await _context.Books.AnyAsync(p => p.Id == id);
+    }
 
     public async Task<(bool IsSuccess, Exception e)> InsertAsync(Book book)
     {

@@ -9,4 +9,5 @@ public interface IBooksRepository
     Task<(bool IsSuccess, Exception e)> InsertAsync(Book book);
     Task<(bool IsSuccess, Exception e)> UpdateAsync(Book book);
     Task<(bool IsSuccess, Exception e)> DeleteIdAsync(Guid id);
+    Task <bool> ExistsAsync(Guid id);
 }
