@@ -32,6 +32,11 @@ public class BookedDishesRepository : IBookedDishesRepository
         }
     }
 
+    public async Task<bool> ExistsAsync(Guid id)
+    {
+        return await _context.BookedDishes.AnyAsync(d => d.Id == id);
+    }
+
     public async Task<List<BookedDish>> GetAllAsync(Func<BookedDish, bool> p = null)
     {
         return _context.BookedDishes.Include(p => p.Book).Where(p).ToList();

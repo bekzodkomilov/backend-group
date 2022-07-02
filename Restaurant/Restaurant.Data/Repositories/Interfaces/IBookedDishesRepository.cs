@@ -9,4 +9,5 @@ public interface IBookedDishesRepository
     Task<(bool IsSuccess, Exception e)> InsertAsync(BookedDish bookedDish);
     Task<(bool IsSuccess, Exception e)> UpdateAsync(BookedDish bookedDish);
     Task<(bool IsSuccess, Exception e)> DeleteIdAsync(Guid id);
+    Task<bool> ExistsAsync(Guid id);
 }
