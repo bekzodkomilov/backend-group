@@ -32,6 +32,11 @@ public class DishesRepository : IDishesRepository
         }
     }
 
+    public async Task<bool> ExistsAsync(Guid id)
+    {
+        return await _context.Dishes.AnyAsync(d => d.Id == id);
+    }
+
     public async Task<List<Dish>> GetAllAsync(Func<Dish, bool> d = null)
     {
         if(d is null)

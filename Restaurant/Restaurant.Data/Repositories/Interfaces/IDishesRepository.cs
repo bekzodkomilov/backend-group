@@ -9,4 +9,5 @@ public interface IDishesRepository
     Task<(bool IsSuccess, Exception e)> InsertAsync(Dish dish);
     Task<(bool IsSuccess, Exception e)> UpdateAsync(Dish dish);
     Task<(bool IsSuccess, Exception e)> DeleteIdAsync(Guid id);
+    Task<bool> ExistsAsync(Guid id);
 }
